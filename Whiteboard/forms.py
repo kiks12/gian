@@ -1,11 +1,14 @@
 from django import forms
 
+from accounts.models import User
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField()
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label='Confirm Password', widget=forms.PasswordInput)
 
     def clean_username(self):
         username = self.cleaned_data.get('username')

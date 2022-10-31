@@ -23,7 +23,7 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("No User")
         return self.cleaned_data
 
-    def login(self, request):
+    def login(self):
         username = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
 
@@ -73,4 +73,5 @@ class RegisterForm(forms.ModelForm):
 
         if commit:
             user.save()
+
         return user

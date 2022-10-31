@@ -6,7 +6,6 @@ User = get_user_model()
 
 def home_page(request):
     if request.user.is_authenticated:
-        # return render(request, "home.html")
         return redirect('coursepage')
     else:
         return redirect('loginpage')

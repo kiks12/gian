@@ -1,8 +1,5 @@
-from email.policy import default
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
-
-# Create your models here.
 
 
 class UserManager(BaseUserManager):
@@ -103,10 +100,10 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-    def has_perm(self, perm, obj=None):
+    def has_perm(self):
         return True
 
-    def has_module_perms(self, app_label):
+    def has_module_perms(self):
         return True
 
     @property

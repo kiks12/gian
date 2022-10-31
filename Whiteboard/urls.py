@@ -1,25 +1,11 @@
-"""Whiteboard URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as logout
 from .views import home_page, update_record, list_user, update, delete, my_info_page
 from accounts.views import loginpage, registerpage
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
 
 from courses.views import \
     course_details_page, \
@@ -57,18 +43,12 @@ urlpatterns = [
     path('course/addlesson/<int:id>', add_lesson, name="addlessonpage"),
     path('addcourse/', add_course, name="addcoursepage"),
     path('editcourse/<int:id>', update_course, name="editcoursepage"),
-    # path('updatecourse/<int:id>', update_course_record, name="updatecourse"),
     path('deletecourse/<int:id>', delete_course, name="deletecourse"),
 
     path('lessons/<int:id>', lesson_page, name="lessonspage"),
     path('deletelessons/<int:id>', delete_lesson, name="deletelessons"),
-
-    # path('sections/', sectionspage, name="sectionspage"),
-    # path('addsections/', addsections, name="addsectionspage"),
-    # path('editsections/<int:id>', updatesections, name="editsectionspage"),
-    # path('updatesections/<int:id>', updatesectionsrecord, name="updatesections"),
-    # path('deletesections/<int:id>', deletesections, name="deletesections"),
 ]
+
 
 if settings.DEBUG:
     urlpatterns = urlpatterns + \

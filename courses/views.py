@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from accounts.models import User
 
-from courses.forms import AddCourseForm, AddSectionForm, AddLessonForm, EnrollForm
-from courses.models import Course, Section, Lesson
+from courses.forms import AddCourseForm, AddLessonForm, EnrollForm
+from courses.models import Course, Lesson
 
 import random
 
@@ -110,16 +110,6 @@ def update_course(request, id):
     return render(request, 'courses/editcourse.html', context)
 
 
-# def update_course_record(request, id):
-#     course = Course.objects.get(id=id)
-#     form = AddCourseForm(request.POST, instance=course)
-#     if form.is_valid():
-#         form.save()
-#         return redirect("coursepage")
-
-#     return render(request, 'courses/editcourse.html', {'course': course})
-
-
 def delete_course(request, id):
     course = Course.objects.get(id=id)
     course.delete()
@@ -134,48 +124,6 @@ def course_details_page(request, id):
     }
 
     return render(request, "courses/detail.html", context)
-
-
-# def sectionspage(request):
-#     section = Section.objects.all()
-#     if request.user.is_authenticated:
-#         return render(request, "sections/sections.html", {'sections': section})
-#     else:
-#         return redirect('loginpage')
-
-
-# def addsections(request):
-#     if request.method == "POST":
-#         form = AddSectionForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#         return render(request, "sections/successsections.html", {'form1': form})
-#     form = AddSectionForm()
-#     return render(request, "sections/addsections.html", {'form': form})
-
-
-# def updatesections(request, id):
-#     section = Section.objects.get(id=id)
-#     context = {
-#         'section': section
-#     }
-#     return render(request, 'sections/editsections.html', context)
-
-
-# def updatesectionsrecord(request, id):
-#     section = Section.objects.get(id=id)
-#     form = AddSectionForm(request.POST, instance=section)
-#     if form.is_valid():
-#         form.save()
-#         return redirect("sectionspage")
-
-#     return render(request, 'sections/editsections.html', {'section': section})
-
-
-# def deletesections(request, id):
-#     section = Section.objects.get(id=id)
-#     section.delete()
-#     return redirect("sectionspage")
 
 
 def lesson_page(request, id):

@@ -1,5 +1,5 @@
 from django import forms
-from courses.models import Course, Section, Lesson
+from courses.models import Course, Lesson
 
 
 class AddCourseForm(forms.ModelForm):
@@ -16,10 +16,10 @@ class AddCourseForm(forms.ModelForm):
         fields = ['title', 'description', 'creator']
 
 
-class AddSectionForm(forms.ModelForm):
-    class Meta:
-        model = Section
-        fields = "__all__"
+# class AddSectionForm(forms.ModelForm):
+#     class Meta:
+#         model = Section
+#         fields = "__all__"
 
 
 class AddLessonForm(forms.ModelForm):
