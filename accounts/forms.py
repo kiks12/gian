@@ -23,7 +23,7 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("No User")
         return self.cleaned_data
 
-    def login(self):
+    def login(self, request):
         username = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
 

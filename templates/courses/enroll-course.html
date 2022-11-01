@@ -21,6 +21,9 @@
     width: 100%;
     margin: 1em 0;
   }
+  .error {
+    color: var(--delete-color);
+  }
 
 </style>
 <body>
@@ -37,6 +40,9 @@
           <label for="key">Enter Course Code</label>
           {{ form.key }}
         </div>
+        {% if error %}
+          <small class="error">{{ error }}</small>
+        {% endif %}
         <button type="submit">
           Enroll
         </button>

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from accounts.models import User
 
@@ -43,18 +44,35 @@ def course_people(request, id):
 
 def enroll_course(request):
     if request.method == "POST":
-        form = EnrollForm(request.POST)
-        user = User.objects.get(id=request.user.id)
-        key = str(request.POST.get('key'))
-        new_course = Course.objects.get(key=key)
-        user.courses.add(new_course)
-        new_course.students.add(user)
-        user.save()
-        new_course.save()
-        return redirect('coursepage')
+        try:
+            form = EnrollForm(request.POST)
+            user = User.objects.get(id=request.user.id)
+            key = str(request.POST.get('key'))
+            new_course = Course.objects.get(key=key)
+            user.courses.add(new_course)
+            new_course.students.add(user)
+            user.save()
+            new_course.save()
+            return redirect('coursepage')
+        except:
+            response = HttpResponse(status=302)
+            response['Location'] = '/course/enroll/?error=302'
+            return response
+
+    if request.GET.get('error'):
+        error = int(request.GET.get('error'))
+        if error == 302:
+            error = 'Incorrect Course Code. Please try again.'
+    else:
+        error = ''
 
     form = EnrollForm()
-    return render(request, "courses/enroll-course.html", {'form': form})
+    context = {
+        'form': form,
+        'error': error,
+    }
+
+    return render(request, "courses/enroll-course.html", context)
 
 
 def unenroll_course(request, id):
